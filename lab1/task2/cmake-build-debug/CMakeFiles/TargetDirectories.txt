@@ -1,0 +1,3 @@
+D:/Programs/bsuir/7sem/TIVP/labs/lab1/task2/cmake-build-debug/CMakeFiles/task2.dir
+D:/Programs/bsuir/7sem/TIVP/labs/lab1/task2/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/Programs/bsuir/7sem/TIVP/labs/lab1/task2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
