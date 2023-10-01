@@ -1,0 +1,3 @@
+D:/Programs/7sem/TIVP/labs/PTaV/lab1/task5/cmake-build-debug/CMakeFiles/task5.dir
+D:/Programs/7sem/TIVP/labs/PTaV/lab1/task5/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/Programs/7sem/TIVP/labs/PTaV/lab1/task5/cmake-build-debug/CMakeFiles/rebuild_cache.dir
