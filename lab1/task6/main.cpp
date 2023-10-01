@@ -1,48 +1,27 @@
-#include <iostream>
-#include <string>
-#include <fstream>
-#include <curl.h>
+#include <stdio.h>
+#include <curl/curl.h>
 
-using namespace std;
-
-size_t writeCallback(void* contents, size_t size, size_t nmemb, void* userp) {
-    ((std::string*)userp)->append((char*)contents, size * nmemb);
-    return size * nmemb;
+size_t write_data(void *ptr, size_t size, size_t nmemb, FILE *stream) {
+    size_t written = fwrite(ptr, size, nmemb, stream);
+    return written;
 }
 
-bool downloadContent(const std::string& url, std::string& content) {
-    CURL* curl = curl_easy_init();
-    if(!curl) {
-        return false;
-    }
-
-    curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writeCallback);
-    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &content);
-    CURLcode res = curl_easy_perform(curl);
-    if(res != CURLE_OK) {
-        std::cerr << "curl_easy_perform() failed: " << curl_easy_strerror(res) << std::endl;
+int main(void) {
+    CURL *curl;
+    FILE *fp;
+    CURLcode res;
+    char *url = "https://www.bsuir.by/m/12_100229_1_122976.pdf";
+    char outfilename[FILENAME_MAX] = "D:\\Programs\\bsuir\\7sem\\TIVP\\PTaV\\lab1\\task6\\test.pdf";
+    curl = curl_easy_init();
+    if (curl) {
+        fp = fopen(outfilename,"wb");
+        curl_easy_setopt(curl, CURLOPT_URL, url);
+        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
+        res = curl_easy_perform(curl);
         curl_easy_cleanup(curl);
-        return false;
+        fclose(fp);
     }
-
-    curl_easy_cleanup(curl);
-    return true;
-}
-
-int main(int argc, char* argv[]) {
-
-
-    std::string url = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";
-    std::string content;
-    std::string output = "D:\\Programs\\7sem\\TIVP";
-    downloadContent(url, content);
-
-    std::ofstream out(output);
-
-    out << content;
-    out.close();
-
-    std::cout << "Downloaded content saved to " << output << std::endl;
     return 0;
 }
