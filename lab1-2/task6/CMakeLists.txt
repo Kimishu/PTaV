@@ -8,3 +8,4 @@ find_package(CURL REQUIRED)
 add_executable(task6 main.cpp)
 
 target_link_libraries(task6 CURL::libcurl)
+

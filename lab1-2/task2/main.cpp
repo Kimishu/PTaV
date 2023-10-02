@@ -5,20 +5,10 @@
 #include <algorithm>
 #include <numeric>
 
+#include "Human.h"
+
 using namespace std;
 
-class Human{
-public:
-    string surname;
-    string name;
-    unsigned short age;
-    Human(){}
-    Human(string surname, string name, unsigned short age){
-        this->surname = std::move(surname);
-        this->name = std::move(name);
-        this->age = age;
-    }
-};
 
 int main() {
 
