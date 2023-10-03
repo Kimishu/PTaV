@@ -1,7 +1,6 @@
-#include <stdio.h>
-#include <curl/curl.h>
 #include <iostream>
 #include <algorithm>
+#include <curl/curl.h>
 
 using namespace std;
 
@@ -10,39 +9,33 @@ size_t write_data(void *ptr, size_t size, size_t nmemb, FILE *stream) {
     return written;
 }
 
-int main(int argc, char* argv[]) {
-    if(argc == 3){
-        string url = string(argv[1]);
-        string outputFilePath = string(argv[2]);
+int main(int argc, char** argv) {
 
-        string urlFileExtension = url.substr(url.size() - 4);
-        if(urlFileExtension.find('.') == string::npos){
-            cout << "Wrong url!" << endl;
-            exit(EXIT_FAILURE);
-        }
-        if(urlFileExtension != outputFilePath.substr(outputFilePath.size() - 4)){
-            cout << "Different file extensions!" << endl;
-            exit(EXIT_FAILURE);
+    string url = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";//string(argv[1]);
+    string outputFilePath = "..\\dummy.pdf";
+
+    CURL *curl = curl_easy_init();
+    FILE *fp;
+    CURLcode res;
+
+    if (curl)
+    {
+        fp = fopen(outputFilePath.c_str(),"wb");
+
+        curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
+        curl_easy_setopt(curl, CURLOPT_SSLCERTTYPE, "PEM");
+        curl_easy_setopt(curl, CURLOPT_CAINFO, "..\\cacert.pem");
+
+        res = curl_easy_perform(curl);
+
+        if(res == CURLE_OK){
+            cout << "Done" << endl;
         }
 
-        CURL *curl;
-        FILE *fp;
-        CURLcode res;
-
-        curl = curl_easy_init();
-        if (curl) {
-            fp = fopen(outputFilePath.c_str(),"wb");
-            curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-            curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
-            curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
-            curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
-            res = curl_easy_perform(curl);
-            curl_easy_cleanup(curl);
-            fclose(fp);
-        }
-    }else {
-        cout << "Wrong parameters count!" << endl;
-        exit(EXIT_FAILURE);
+        curl_easy_cleanup(curl);
+        fclose(fp);
     }
 
     return 0;
