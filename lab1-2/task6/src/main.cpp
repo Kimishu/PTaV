@@ -2,8 +2,7 @@
 
 using namespace std;
 
-int main(int argc, char** argv) {
-
+int main() {
     string url = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";
     string outputFilePath = "..\\data\\dummy.pdf";
 
