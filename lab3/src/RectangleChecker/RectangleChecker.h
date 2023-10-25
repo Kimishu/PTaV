@@ -10,21 +10,23 @@
 #include <algorithm>
 
 class RectangleChecker {
-    std::array<long double, 4> sides{};
-    std::array<long double, 4> angles{};
+    static std::array<long double, 4> sides;
+    static std::array<long double, 4> angles;
 
-    bool SidesEqual();
-    bool OppositeSidesEqual();
-    bool AnglesEqual();
+    static bool SidesEqual();
+    static bool OppositeSidesEqual();
+    static bool AnglesEqual();
+    static bool OppositeAnglesEqual();
+    static bool IsParallel();
 
-    bool CheckSides();
-    bool CheckAngles();
+    static bool CheckSides();
+    static bool CheckAngles();
 public:
     RectangleChecker();
     RectangleChecker(std::array<long double, 4> sides, std::array<long double, 4> angles);
     ~RectangleChecker();
 
-    std::string GetType();
+    static std::string GetType();
 };
 
 
