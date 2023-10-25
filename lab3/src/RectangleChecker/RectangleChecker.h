@@ -13,12 +13,9 @@ class RectangleChecker {
     std::array<long double, 4> sides{};
     std::array<long double, 4> angles{};
 
-    bool IsParallelogram();
-    bool IsRhombus();// + Rhombus
-    bool IsRectangle();
-    bool IsSquare();// + Square
-    bool IsDeltoid();
-    bool IsTrapezoid();
+    bool SidesEqual();
+    bool OppositeSidesEqual();
+    bool AnglesEqual();
 
     bool CheckSides();
     bool CheckAngles();

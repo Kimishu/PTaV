@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "D:/Programs/7sem/TIVP/labs/PTaV/lab3/cmake-build-debug",
-		"source" : "D:/Programs/7sem/TIVP/labs/PTaV/lab3"
+		"build" : "D:/Programs/bsuir/7sem/TIVP/PTaV/lab3/cmake-build-debug",
+		"source" : "D:/Programs/bsuir/7sem/TIVP/PTaV/lab3"
 	},
 	"version" : 
 	{

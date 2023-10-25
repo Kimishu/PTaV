@@ -28,21 +28,14 @@ RectangleChecker::~RectangleChecker() {
 }
 
 std::string RectangleChecker::GetType() {
-    if(IsRectangle()) {
-        if(IsSquare())
+    if(AnglesEqual()) {
+        if(SidesEqual())
             return "Square";
-        return "Rectangle";
+        else if(OppositeSidesEqual())
+            return "Rectangle";
     }
-    if(IsParallelogram()){
-        if(IsRhombus())
-            return "Rhombus";
-        return "Parallelogram";
-    }
-    if(IsDeltoid())
-        return "Deltoid";
-    if(IsTrapezoid())
-        return "Trapezoid";
-    return "None";
+    
+    return "Quadrilateral";
 }
 
 bool RectangleChecker::CheckSides() {
@@ -59,3 +52,16 @@ bool RectangleChecker::CheckAngles() {
 
     return (result == 360) && valid;
 }
+
+bool RectangleChecker::SidesEqual() {
+    return std::adjacent_find(sides.begin(), sides.end(), std::not_equal_to<>()) == sides.end();
+}
+
+bool RectangleChecker::OppositeSidesEqual() {
+    return std::adjacent_find(sides.begin(), sides.end(), std::equal_to<>()) == sides.end();
+}
+
+bool RectangleChecker::AnglesEqual() {
+    return std::adjacent_find(angles.begin(), angles.end(), std::not_equal_to<>()) == angles.end();
+}
+
