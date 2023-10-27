@@ -17,7 +17,6 @@ class RectangleChecker {
     static bool OppositeSidesEqual();
     static bool AnglesEqual();
     static bool OppositeAnglesEqual();
-    static bool IsParallel();
 
     static bool CheckSides();
     static bool CheckAngles();

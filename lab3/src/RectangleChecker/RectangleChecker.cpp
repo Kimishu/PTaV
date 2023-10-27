@@ -17,12 +17,10 @@ RectangleChecker::RectangleChecker(std::array<long double, 4> sides, std::array<
     this->sides = sides;
     this->angles = angles;
     if(!CheckSides()) {
-        std::cerr << "Wrong side(s) value!" << std::endl;
-        std::exit(1);
+        throw std::invalid_argument("Wrong side(s) values!");
     }
     if(!CheckAngles()) {
-        std::cerr << "Wrong angle(s) value!" << std::endl;
-        std::exit(1);
+        throw std::invalid_argument("Wrong angle(s) values!");
     }
 }
 
@@ -44,7 +42,7 @@ std::string RectangleChecker::GetType() {
             return "Parallelogram";
     }
 
-    if(((angles[0] + angles[1]) == 180 && (angles[2]+angles[3]) == 180) &&
+    if(((angles[0] + angles[1]) == 180 && (angles[2] + angles[3]) == 180) &&
         (angles[0] + angles[2] != 180 && angles[1] + angles[3] != 180))
         return "Trapezoid";
 
@@ -89,9 +87,5 @@ bool RectangleChecker::AnglesEqual() {
 
 bool RectangleChecker::OppositeAnglesEqual() {
     return std::adjacent_find(angles.begin(), angles.end(), std::equal_to<>()) == angles.end();;
-}
-
-bool RectangleChecker::IsParallel() {
-    return (angles[0] + angles[1]) == 180 && (angles[2]+angles[3]) == 180;
 }
 
