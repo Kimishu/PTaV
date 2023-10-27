@@ -11,3 +11,5 @@ CTestTestfile.cmake
 _deps
 lab*/task*/.idea/
 lab*/task*/cmake-build-debug
+lab*/.idea/
+lab*/cmake-build-debug
